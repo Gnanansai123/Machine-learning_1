@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+{% block title %}Linear Regression{% endblock %}
+
+{% block content %}
+
+<div class="lr-header">
+    <div>
+        <h1>Linear Regression</h1>
+        <p class="subtitle">
+            Predict <strong>weather delay</strong> using Linear Regression.
+        </p>
+    </div>
+
+    <form method="POST">
+        <button class="lr-button" type="submit">
+            Train Linear Regression
+        </button>
+    </form>
+</div>
+
+<div class="lr-flow">
+    <div>Flight Dataset</div>
+    <span>→</span>
+    <div>Preprocessing</div>
+    <span>→</span>
+    <div>Train/Test Split</div>
+    <span>→</span>
+    <div>Linear Regression</div>
+    <span>→</span>
+    <div>Prediction</div>
+</div>
+
+{% if result %}
+
+<div class="lr-cards">
+
+    <div class="lr-card">
+        <span>R² Score</span>
+        <strong>{{ result.r2 }}</strong>
+        <small>Higher is generally better</small>
+    </div>
+
+    <div class="lr-card">
+        <span>MAE</span>
+        <strong>{{ result.mae }}</strong>
+        <small>Mean Absolute Error</small>
+    </div>
+
+    <div class="lr-card">
+        <span>RMSE</span>
+        <strong>{{ result.rmse }}</strong>
+        <small>Root Mean Squared Error</small>
+    </div>
+
+    <div class="lr-card">
+        <span>Training Rows</span>
+        <strong>{{ result.training_rows }}</strong>
+        <small>80% of the dataset</small>
+    </div>
+
+    <div class="lr-card">
+        <span>Testing Rows</span>
+        <strong>{{ result.testing_rows }}</strong>
+        <small>20% of the dataset</small>
+    </div>
+
+</div>
+
+<div class="lr-panel">
+    <h2>Model Information</h2>
+
+    <div class="lr-info-grid">
+        <div>
+            <label>Target</label>
+            <p>{{ result.target }}</p>
+        </div>
+
+        <div>
+            <label>Total Rows</label>
+            <p>{{ result.total_rows }}</p>
+        </div>
+
+        <div>
+            <label>Features Used</label>
+            <p>{{ result.features_used }}</p>
+        </div>
+
+        <div>
+            <label>Numeric Features</label>
+            <p>{{ result.numeric_features }}</p>
+        </div>
+
+        <div>
+            <label>Categorical Features</label>
+            <p>{{ result.categorical_features }}</p>
+        </div>
+    </div>
+</div>
+
+<div class="lr-panel">
+    <h2>How the Model Works</h2>
+
+    <ol class="lr-steps">
+        <li>Load the flight dataset.</li>
+        <li>Remove completely empty columns.</li>
+        <li>Separate the target <strong>weather_delay</strong> from input features.</li>
+        <li>Fill missing numeric values using the median.</li>
+        <li>Fill missing categorical values using the most frequent value.</li>
+        <li>Convert categorical values into numerical values using One-Hot Encoding.</li>
+        <li>Scale numerical features.</li>
+        <li>Split the dataset into 80% training and 20% testing data.</li>
+        <li>Train the Linear Regression model.</li>
+        <li>Evaluate the predictions using R², MAE and RMSE.</li>
+    </ol>
+</div>
+
+<div class="lr-panel">
+    <h2>Actual vs Predicted</h2>
+    <p class="lr-description">
+        Points closer to the diagonal line indicate predictions closer to
+        the actual weather-delay values.
+    </p>
+
+    <img
+        class="lr-chart"
+        src="{{ url_for('static', filename='linear_regression/actual_vs_predicted.png') }}"
+        alt="Actual vs Predicted Linear Regression Graph"
+    >
+</div>
+
+{% else %}
+
+<div class="lr-empty">
+    <div class="lr-icon">📈</div>
+    <h2>Linear Regression is ready</h2>
+    <p>
+        Click <strong>Train Linear Regression</strong> to train the model
+        using your flight dataset.
+    </p>
+</div>
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Prediction{% endblock %}
+{% block content %}
+<h1>Flight Price / Target Prediction</h1>
+<p>Enter flight details and click Predict.</p>
+<div class="panel">
+<form method="post" class="form-grid">
+{% for f in features %}
+  <div>
+    <label>{{ f }}</label>
+    {% if f in choices %}
+      <select name="{{ f }}">
+        {% for option in choices[f] %}<option value="{{ option }}">{{ option }}</option>{% endfor %}
+      </select>
+    {% else %}
+      <input type="text" name="{{ f }}" placeholder="Enter {{ f }}">
+    {% endif %}
+  </div>
+{% endfor %}
+<div><button class="btn" type="submit">Predict</button></div>
+</form>
+</div>
+{% if message %}<div class="result"><p>{{ message }}</p><h2>Predicted {{ target }}: {{ "%.2f"|format(prediction) }}</h2></div>{% endif %}
+{% endblock %}

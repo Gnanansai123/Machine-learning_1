@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Data Loading{% endblock %}
+{% block content %}
+<h1>Data Loading</h1>
+<div class="cards">
+<div class="card"><span>Rows</span><strong>{{ rows }}</strong></div>
+<div class="card"><span>Columns</span><strong>{{ columns }}</strong></div>
+</div>
+<div class="panel">
+<h2>Columns</h2>
+<div class="tags">{% for c in column_names %}<span>{{ c }}</span>{% endfor %}</div>
+</div>
+<div class="panel"><h2>Dataset Preview</h2><div class="table-wrap">{{ preview|safe }}</div></div>
+{% endblock %}

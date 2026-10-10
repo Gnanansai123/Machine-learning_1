@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlightFore AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="app">
+    <aside class="sidebar">
+        <div class="brand">
+            <h2>✈ FlightFore</h2>
+            <p>AI Flight Prediction</p>
+        </div>
+
+        <div class="menu-title">Main Menu</div>
+
+        <a class="menu-link {% if request.path == '/' %}active{% endif %}" href="{{ url_for('dashboard') }}">
+            📊 Dashboard
+        </a>
+
+        <a class="menu-link {% if request.path == '/data-loading' %}active{% endif %}" href="{{ url_for('data_loading') }}">
+            📁 Data Loading
+        </a>
+
+        <a class="menu-link {% if request.path == '/preprocessing' %}active{% endif %}" href="{{ url_for('preprocessing') }}">
+            ⚙ Preprocessing
+        </a>
+
+        <a class="menu-link {% if request.path == '/linear-regression' %}active{% endif %}" href="{{ url_for('linear_regression') }}">
+            📈 Linear Regression
+        </a>
+
+        <a class="menu-link {% if request.path == '/logistic-regression' %}active{% endif %}" href="{{ url_for('logistic_regression') }}">
+            🧠 Logistic Regression
+        </a>
+    </aside>
+
+    <main class="main">
+        {% block content %}{% endblock %}
+    </main>
+</div>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

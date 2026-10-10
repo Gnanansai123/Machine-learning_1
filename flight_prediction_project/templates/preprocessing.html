@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Preprocessing{% endblock %}
+{% block content %}
+<h1>Data Preprocessing</h1>
+<div class="panel">
+<h2>Numeric Columns</h2><div class="tags">{% for c in numeric %}<span>{{ c }}</span>{% endfor %}</div>
+<h2>Categorical Columns</h2><div class="tags">{% for c in categorical %}<span>{{ c }}</span>{% endfor %}</div>
+</div>
+<div class="panel">
+<h2>Missing Values</h2>
+{% if missing %}
+<table><tr><th>Column</th><th>Missing Values</th></tr>{% for c,n in missing %}<tr><td>{{ c }}</td><td>{{ n }}</td></tr>{% endfor %}</table>
+{% else %}<p>No missing values detected.</p>{% endif %}
+</div>
+<div class="panel">
+<h2>Preprocessing used by models</h2>
+<ul><li>Numeric missing values → median</li><li>Categorical missing values → most frequent value</li><li>Categorical features → One-Hot Encoding</li><li>Numeric features → Standard Scaling</li></ul>
+</div>
+{% endblock %}

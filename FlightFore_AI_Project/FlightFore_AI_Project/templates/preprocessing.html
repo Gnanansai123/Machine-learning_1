@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="topbar">
+    <h1>Data Preprocessing</h1>
+    <p>Understand the transformations used before machine learning.</p>
+</div>
+
+<div class="cards">
+    <div class="card"><h4>Dataset Size</h4><div class="value">{{ info.shape }}</div></div>
+    <div class="card"><h4>Missing Values</h4><div class="value">{{ info.missing_values }}</div></div>
+    <div class="card"><h4>Duplicate Rows</h4><div class="value">{{ info.duplicate_rows }}</div></div>
+</div>
+
+<div class="grid-2">
+    <div class="panel">
+        <h2>Numeric Features</h2>
+        {% for item in info.numeric_columns %}
+            <span class="badge">{{ item }}</span>
+        {% endfor %}
+        <p class="footer-note">
+            Numeric values are standardized before logistic regression.
+        </p>
+    </div>
+
+    <div class="panel">
+        <h2>Categorical Features</h2>
+        {% for item in info.categorical_columns %}
+            <span class="badge">{{ item }}</span>
+        {% endfor %}
+        <p class="footer-note">
+            Categorical values are converted using One-Hot Encoding.
+        </p>
+    </div>
+</div>
+
+<div class="panel">
+    <h2>Targets</h2>
+    <p><strong>Linear Regression:</strong> {{ info.target_for_linear }}</p>
+    <p><strong>Logistic Regression:</strong> {{ info.target_for_logistic }}</p>
+</div>
+
+<div class="panel">
+    <h2>Status Distribution</h2>
+    <table>
+        <tr><th>Status</th><th>Number of Flights</th></tr>
+        {% for status, count in info.status_counts.items() %}
+        <tr><td>{{ status }}</td><td>{{ count }}</td></tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

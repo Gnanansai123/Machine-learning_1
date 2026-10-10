@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h1>Flight Data Prediction Dashboard</h1>
+<p class="subtitle">A complete Flask + Machine Learning project based on your flight dataset.</p>
+<div class="cards">
+  <div class="card"><span>Dataset Rows</span><strong>{{ rows }}</strong></div>
+  <div class="card"><span>Columns</span><strong>{{ columns }}</strong></div>
+  <div class="card"><span>Target</span><strong>{{ target }}</strong></div>
+  <div class="card"><span>Features</span><strong>{{ features|length }}</strong></div>
+</div>
+<div class="panel">
+<h2>Project Flow</h2>
+<div class="flow"><b>Flight Dataset</b> → <b>Data Loading</b> → <b>Preprocessing</b> → <b>ML Model</b> → <b>Prediction</b></div>
+</div>
+{% if model_info %}
+<div class="panel"><h2>Saved Model Results</h2>
+{% for name, metrics in model_info.items() %}
+<div class="metric-box"><h3>{{ metrics.model }}</h3><pre>{{ metrics | tojson(indent=2) }}</pre></div>
+{% endfor %}
+</div>
+{% endif %}
+{% endblock %}

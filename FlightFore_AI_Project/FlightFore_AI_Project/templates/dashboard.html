@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="topbar">
+    <h1>FlightFore Dashboard</h1>
+    <p>AI-Based Flight Delay and Cancellation Prediction System</p>
+</div>
+
+<div class="cards">
+    <div class="card">
+        <h4>Total Flights</h4>
+        <div class="value">{{ stats.total_flights }}</div>
+    </div>
+    <div class="card">
+        <h4>Delayed Flights</h4>
+        <div class="value">{{ stats.delayed }}</div>
+    </div>
+    <div class="card">
+        <h4>Cancelled Flights</h4>
+        <div class="value">{{ stats.cancelled }}</div>
+    </div>
+    <div class="card">
+        <h4>On-Time Flights</h4>
+        <div class="value">{{ stats.on_time }}</div>
+    </div>
+</div>
+
+<div class="grid-2">
+    <div class="panel">
+        <h2>Project Overview</h2>
+        <p>
+            FlightFore uses machine learning to analyze flight information and
+            estimate arrival delay and flight status.
+        </p>
+        <br>
+        <div class="info-box">
+            <strong>Linear Regression</strong>
+            <p>Predicts arrival delay in minutes.</p>
+        </div>
+        <br>
+        <div class="info-box">
+            <strong>Logistic Regression</strong>
+            <p>Classifies the flight as On-Time, Delayed, or Cancelled.</p>
+        </div>
+    </div>
+
+    <div class="panel">
+        <h2>Dataset Summary</h2>
+        <p>Average arrival delay: <strong>{{ stats.average_arrival_delay }} minutes</strong></p>
+        <p>Delay rate: <strong>{{ stats.delay_rate }}%</strong></p>
+        <p>Cancellation rate: <strong>{{ stats.cancellation_rate }}%</strong></p>
+
+        <br>
+        <h3>Airlines</h3>
+        {% for airline in stats.airlines %}
+            <span class="badge">{{ airline }}</span>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="panel">
+    <h2>ML Workflow</h2>
+    <p>
+        Data Loading → Preprocessing → Feature Selection →
+        Model Training → Prediction → Evaluation
+    </p>
+</div>
+{% endblock %}

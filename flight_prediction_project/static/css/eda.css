@@ -1,0 +1,84 @@
+
+/* =========================
+   EDA PAGE
+   ========================= */
+
+.eda-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.insights {
+    display: grid;
+    gap: 10px;
+}
+
+.insight {
+    background: #f8fafc;
+    border-left: 4px solid #2563eb;
+    padding: 13px 15px;
+    border-radius: 6px;
+}
+
+.table-wrap {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.eda-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    font-size: 13px;
+}
+
+.eda-table th {
+    background: #f1f5f9;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.eda-table th,
+.eda-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #e2e8f0;
+    text-align: left;
+}
+
+.eda-table tr:hover {
+    background: #f8fafc;
+}
+
+.eda-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.chart-card {
+    background: #f8fafc;
+    border-radius: 10px;
+    padding: 15px;
+    overflow: hidden;
+}
+
+.chart-card h3 {
+    margin-top: 0;
+    font-size: 17px;
+}
+
+.chart-card img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 7px;
+    background: white;
+}
+
+@media (max-width: 900px) {
+    .eda-grid {
+        grid-template-columns: 1fr;
+    }
+}

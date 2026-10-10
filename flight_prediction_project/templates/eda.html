@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block title %}EDA - Flight Dataset{% endblock %}
+
+{% block content %}
+<div class="eda-header">
+    <div>
+        <h1>Exploratory Data Analysis</h1>
+        <p class="subtitle">
+            Understand the flight dataset before Machine Learning.
+        </p>
+    </div>
+</div>
+
+<div class="cards">
+    <div class="card">
+        <span>Total Rows</span>
+        <strong>{{ result.shape.rows }}</strong>
+    </div>
+    <div class="card">
+        <span>Total Columns</span>
+        <strong>{{ result.shape.columns }}</strong>
+    </div>
+    <div class="card">
+        <span>Numeric Columns</span>
+        <strong>{{ result.numeric_columns|length }}</strong>
+    </div>
+    <div class="card">
+        <span>Categorical Columns</span>
+        <strong>{{ result.categorical_columns|length }}</strong>
+    </div>
+    <div class="card">
+        <span>Duplicate Rows</span>
+        <strong>{{ result.duplicate_count }}</strong>
+    </div>
+</div>
+
+<div class="panel">
+    <h2>EDA Summary</h2>
+    <div class="insights">
+        {% for item in result.insights %}
+        <div class="insight">{{ item }}</div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="panel">
+    <h2>Missing Values</h2>
+    {% if result.missing_rows %}
+    <div class="table-wrap">
+        <table class="eda-table">
+            <thead>
+                <tr>
+                    <th>Column</th>
+                    <th>Missing Values</th>
+                    <th>Percentage</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for row in result.missing_rows %}
+                <tr>
+                    <td>{{ row.column }}</td>
+                    <td>{{ row.count }}</td>
+                    <td>{{ row.percentage }}%</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        <p>No missing values found.</p>
+    {% endif %}
+</div>
+
+<div class="panel">
+    <h2>Descriptive Statistics</h2>
+    <div class="table-wrap">
+        {{ result.stats_html|safe }}
+    </div>
+</div>
+
+<div class="panel">
+    <h2>Correlation Matrix</h2>
+    <div class="table-wrap">
+        {{ result.correlation_html|safe }}
+    </div>
+</div>
+
+<div class="panel">
+    <h2>EDA Visualizations</h2>
+    <div class="eda-grid">
+        {% for title, image in result.charts %}
+        <div class="chart-card">
+            <h3>{{ title }}</h3>
+            <img src="{{ image }}" alt="{{ title }}">
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

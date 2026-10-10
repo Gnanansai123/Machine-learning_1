@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Flight ML Project{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <h2>✈ Flight ML</h2>
+      <p class="small">Machine Learning Dashboard</p>
+      <nav>
+        <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('data_loading') }}">Data Loading</a>
+        <a href="{{ url_for('preprocessing') }}">Preprocessing</a>
+        <a href="{{ url_for('linear') }}">Linear Regression</a>
+        <a href="{{ url_for('logistic') }}">Logistic Regression</a>
+        <a href="{{ url_for('predict') }}">Prediction</a>
+      </nav>
+    </aside>
+    <main class="content">
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+</body>
+</html>
